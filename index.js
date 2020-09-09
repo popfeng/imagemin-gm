@@ -30,7 +30,7 @@ module.exports = class ImageminGm {
     }
   }
 
-  convert (to) {
+  convert (to, quality = 80) {
     return buf => {
       if (!Buffer.isBuffer(buf)) {
         return Promise.reject(new TypeError('Expected a buffer'))
@@ -58,6 +58,7 @@ module.exports = class ImageminGm {
               .flatten()
           }
 
+          image = image.quality(quality)
           image.toBuffer(to, (err, buffer) => (err) ? reject(err) : resolve(buffer))
         })
       })
